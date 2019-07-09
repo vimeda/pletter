@@ -1,6 +1,11 @@
 <h1 align="center">Welcome to Pletter 👋</h1>
 <p></p>
 
+[![Build Status](https://travis-ci.com/vimeda/pletter.svg?branch=master)](https://travis-ci.com/vimeda/pletter)
+[![Coverage Status](https://coveralls.io/repos/github/vimeda/pletter/badge.svg)](https://coveralls.io/github/vimeda/pletter)
+[![Go Report Card](https://goreportcard.com/badge/github.com/vimeda/pletter)](https://goreportcard.com/report/github.com/vimeda/pletter)
+[![GoDoc](https://godoc.org/github.com/vimeda/pletter?status.svg)](https://godoc.org/github.com/vimeda/pletter)
+
 > A standard way to wrap a proto message
 
 Pletter was born with a single mission: `To standardize wrapping protocol buffer messages`. This is normally needed when you use protobuf as your messaging protocol. 
