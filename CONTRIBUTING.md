@@ -1,8 +1,8 @@
-# Contributing to Platter
+# Contributing to Pletter
 
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
 
-The following is a set of guidelines for contributing to Platter and its packages, 
+The following is a set of guidelines for contributing to Pletter and its packages, 
 which are hosted on [Github](https://github.com/vimeda) on GitHub.
 These are just guidelines, not rules. Use your best judgment, and feel free to propose changes 
 to this document in a pull request.
@@ -13,13 +13,13 @@ This project adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDU
 By participating, you are expected to uphold this code.
 Please report unacceptable behavior to [opensource@lykon.com](mailto:opensource@lykon.com).
 
-We accept contributions via Pull Requests on [Github](https://github.com/vimeda/platter).
+We accept contributions via Pull Requests on [Github](https://github.com/vimeda/pletter).
 
 ## How Can I Contribute?
 
 ### Reporting Bugs
 
-This section guides you through submitting a bug report for Platter. Following these guidelines helps maintainers 
+This section guides you through submitting a bug report for Pletter. Following these guidelines helps maintainers 
 and the community understand your report :pencil:, reproduce the behavior :computer: :computer:, and find related 
 reports :mag_right:.
 
@@ -33,7 +33,7 @@ Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/).
 Explain the problem and include additional details to help maintainers reproduce the problem:
 
 * **Use a clear and descriptive title** for the issue to identify the problem.
-* **Describe the exact steps which reproduce the problem** in as many details as possible. For example, start by explaining how you started Platter, 
+* **Describe the exact steps which reproduce the problem** in as many details as possible. For example, start by explaining how you started Pletter, 
 e.g. which command exactly you used in the terminal. When listing steps, **don't just say what you did, but explain how you did it**.
 * **Provide specific examples to demonstrate the steps**. Include links to files or GitHub projects, or copy/pasteable snippets, which you use in those examples. 
 If you're providing snippets in the issue, use [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
@@ -42,12 +42,12 @@ If you're providing snippets in the issue, use [Markdown code blocks](https://he
 
 Include details about your configuration and environment:
 
-* **Which version of Platter are you using?**
+* **Which version of Pletter are you using?**
 * **What's the name and version of the OS you're using**?
 
 ### Your First Code Contribution
 
-Unsure where to begin contributing to Platter? You can start by looking through these `beginner` and `help-wanted` issues:
+Unsure where to begin contributing to Pletter? You can start by looking through these `beginner` and `help-wanted` issues:
 
 * [Beginner issues][beginner] - issues which should only require a few lines of code, and a test or two.
 * [Help wanted issues][help-wanted] - issues which should be a bit more involved than `beginner` issues.
