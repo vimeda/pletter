@@ -1,4 +1,2 @@
 github.com/golang/protobuf v1.3.1 h1:YF8+flBXS5eO826T4nzqPrxfhQThhXl0YzfuUPu4SBg=
 github.com/golang/protobuf v1.3.1/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
-github.com/vimeda/neurons v0.0.0-20190709080813-878338217aee h1:NFBMCLD6mtUT0wbgNI7cuDhqBUuaQuLXnEYgeQ3osMU=
-github.com/vimeda/neurons v0.0.0-20190709080813-878338217aee/go.mod h1:se6VugtLZZe06xOeh/amWEdq51d9V5ROQupgCKCaEU4=
