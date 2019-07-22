@@ -13,11 +13,11 @@ func TestAny(t *testing.T) {
 		function func(*testing.T)
 	}{
 		{
-			scenario: "pack proto message successfuly",
+			scenario: "pack proto message successfully",
 			function: testPackProtoMessage,
 		},
 		{
-			scenario: "pack and marshal proto message successfuly",
+			scenario: "pack and marshal proto message successfully",
 			function: testPackAndMarshallProtoMessage,
 		},
 		{
@@ -25,7 +25,7 @@ func TestAny(t *testing.T) {
 			function: testPackAndMarshallProtoMessageFail,
 		},
 		{
-			scenario: "unpack a proto message successfuly",
+			scenario: "unpack a proto message successfully",
 			function: testUnpackProtoMessage,
 		},
 		{
@@ -33,7 +33,7 @@ func TestAny(t *testing.T) {
 			function: testUnpackProtoMessageFail,
 		},
 		{
-			scenario: "get proto message name successfuly",
+			scenario: "get proto message name successfully",
 			function: testGetProtoMessageName,
 		},
 		{
@@ -134,6 +134,10 @@ func testGetProtoMessageName(t *testing.T) {
 	}
 
 	name, err := any.GetMessageName(raw)
+	if err != nil {
+		t.Errorf("an error was not expected when getting the message name: %s", err)
+		t.Fail()
+	}
 
 	expectedName := "pb.Example"
 	if name != expectedName {
