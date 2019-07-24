@@ -28,7 +28,7 @@ An interesting article about streams architecture can be found [here](https://do
 ## Install
 
 ```sh
-go get github.com:vimeda/pletter
+go get github.com/vimeda/pletter
 ```
 
 ## Use
