@@ -1,13 +1,19 @@
 package any
 
 import (
+	"errors"
+	"fmt"
 	"strings"
 
-	"github.com/golang/protobuf/proto"
+	proto_old "github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"github.com/golang/protobuf/ptypes/any"
 	"github.com/vimeda/pletter/pb"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/anypb"
 )
+
+// ErrEmptyMessage when message is nil
+var ErrEmptyMessage = errors.New("message is nil")
 
 // PackAndMarshal packs a proto message into an envelope message and marshal it
 func PackAndMarshal(m proto.Message) ([]byte, error) {
@@ -21,14 +27,22 @@ func PackAndMarshal(m proto.Message) ([]byte, error) {
 
 // Pack packs a proto message into an envelope message
 func Pack(m proto.Message) (pb.Envelope, error) {
+	if m == nil {
+		return pb.Envelope{}, ErrEmptyMessage
+	}
+
 	raw, err := proto.Marshal(m)
 	if err != nil {
 		return pb.Envelope{}, err
 	}
 
+	fullName := m.ProtoReflect().Descriptor().FullName()
+
+	fmt.Println(fullName)
+
 	return pb.Envelope{
-		InnerMessage: &any.Any{
-			TypeUrl: "github.com/lykon/pletter/" + proto.MessageName(m),
+		InnerMessage: &anypb.Any{
+			TypeUrl: fmt.Sprintf("github.com/lykon/pletter/%s", fullName),
 			Value:   raw,
 		},
 	}, nil
@@ -42,12 +56,10 @@ func Unpack(m []byte, t proto.Message) error {
 		return err
 	}
 
-	err = ptypes.UnmarshalAny(e.GetInnerMessage(), t)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return ptypes.UnmarshalAny(
+		e.GetInnerMessage(),
+		proto_old.MessageV1(t),
+	)
 }
 
 // GetMessageName returns the message name from the wrapped proto message
