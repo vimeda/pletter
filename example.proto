@@ -2,6 +2,6 @@ syntax = "proto3";
 
 package pb;
 
-message Example {
-    string ID = 1;
-}
+option go_package = "github.com/vimeda/pletter/pb";
+
+message Example { string ID = 1; }
