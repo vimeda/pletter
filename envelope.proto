@@ -4,6 +4,6 @@ import "google/protobuf/any.proto";
 
 package pb;
 
-message Envelope {
-    google.protobuf.Any innerMessage = 1;
-}
+option go_package = "github.com/vimeda/pletter/pb";
+
+message Envelope { google.protobuf.Any innerMessage = 1; }
