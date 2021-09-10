@@ -12,6 +12,8 @@ import (
 	"google.golang.org/protobuf/types/known/anypb"
 )
 
+const pkg = "github.com/lykon/pletter/"
+
 // ErrEmptyMessage when message is nil
 var ErrEmptyMessage = errors.New("message is nil")
 
@@ -33,16 +35,12 @@ func Pack(m proto.Message) (pb.Envelope, error) {
 
 	raw, err := proto.Marshal(m)
 	if err != nil {
-		return pb.Envelope{}, err
+		return pb.Envelope{}, fmt.Errorf("error marshaling message: %w", err)
 	}
-
-	const pkg = "github.com/lykon/pletter/%s"
-
-	fullName := m.ProtoReflect().Descriptor().FullName()
 
 	return pb.Envelope{
 		InnerMessage: &anypb.Any{
-			TypeUrl: fmt.Sprintf(pkg, fullName),
+			TypeUrl: pkg + string(proto.MessageName(m)),
 			Value:   raw,
 		},
 	}, nil
@@ -53,7 +51,7 @@ func Pack(m proto.Message) (pb.Envelope, error) {
 func Unpack(m []byte, t proto.Message) error {
 	e, err := getEnvelope(m)
 	if err != nil {
-		return err
+		return fmt.Errorf("error getting the envelope: %w", err)
 	}
 
 	return ptypes.UnmarshalAny(e.GetInnerMessage(), proto_old.MessageV1(t))
@@ -63,7 +61,7 @@ func Unpack(m []byte, t proto.Message) error {
 func GetMessageName(m []byte) (string, error) {
 	e, err := getEnvelope(m)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("error getting the envelope: %w", err)
 	}
 
 	splits := strings.Split(e.GetInnerMessage().GetTypeUrl(), "/")
