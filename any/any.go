@@ -56,6 +56,7 @@ func Unpack(m []byte, t proto.Message) error {
 	return ptypes.UnmarshalAny(e.GetInnerMessage(), proto_old.MessageV1(t))
 }
 
+// GetMessageName returns the message name from the wrapped proto message
 func GetMessageName(m []byte) (string, error) {
 	e, err := getEnvelope(m)
 	if err != nil {
