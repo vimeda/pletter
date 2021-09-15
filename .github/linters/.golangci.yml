@@ -1,0 +1,33 @@
+run:
+  deadline: 5m
+  tests: true
+  skip-dirs:
+  - .github
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+      - dupl
+      - gosec
+      - goconst
+      - typecheck
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - deadcode
+    - dupl
+    - gosec
+    - unconvert
+    - gocyclo
+    - goconst
+    - goimports
+    - gocritic
+    - govet
+    - revive
+
+linters-settings:
+  misspell:
+    locale: US
