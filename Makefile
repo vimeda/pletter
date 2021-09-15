@@ -24,7 +24,7 @@ OK_COLOR=\033[32;01m
 ERROR_COLOR=\033[31;01m
 WARN_COLOR=\033[33;01m
 
-.PHONY: compile
+.PHONY: proto
 
 proto: tools
 	@echo "$(OK_COLOR)==> Compile the pb.go files$(NO_COLOR)"
