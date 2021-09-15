@@ -1,0 +1,37 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+template: |
+  # Changelog
+  $CHANGES
+  See details of [all code changes](https://github.com/vimeda/account-srv/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION) since previous release
+categories:
+  - title: '❗️ Breaking'
+    labels:
+      - 'type: breaking'
+  - title: '🚀 Features'
+    labels:
+      - 'feature'
+      - 'type: feature'
+      - 'enhancement'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'bug'
+      - 'type: bug'
+  - title: '🧰 Maintenance'
+    labels:
+      - 'documentation'
+      - 'type: docs'
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+version-resolver:
+  major:
+    labels:
+      - 'type: breaking'
+  minor:
+    labels:
+      - 'type: enhancement'
+  patch:
+    labels:
+      - 'type: bug'
+      - 'type: maintenance'
+      - 'type: docs'
+  default: patch
