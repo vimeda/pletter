@@ -3,7 +3,6 @@ package any
 import (
 	"errors"
 	"fmt"
-	"strings"
 
 	proto_old "github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
@@ -64,9 +63,7 @@ func GetMessageName(m []byte) (string, error) {
 		return "", fmt.Errorf("error getting the envelope: %w", err)
 	}
 
-	splits := strings.Split(e.GetInnerMessage().GetTypeUrl(), "/")
-
-	return splits[len(splits)-1], nil
+	return e.GetInnerMessage().GetTypeUrl()[len(pkg):], nil
 }
 
 func getEnvelope(m []byte) (*pb.Envelope, error) {
