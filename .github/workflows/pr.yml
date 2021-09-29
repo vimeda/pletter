@@ -1,0 +1,81 @@
+name: Pull Request
+on: [pull_request]
+
+env:
+  GOPRIVATE: "github.com/vimeda/*"
+
+jobs:
+  lint:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Lint Code Base
+        uses: docker://ghcr.io/github/super-linter:slim-v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
+          VALIDATE_DOCKERFILE: true
+          VALIDATE_GO: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  test:
+    needs: [lint]
+    name: Test
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Setup go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17.x
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Test
+        run: make test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GB_TOKEN_PRIVATE }}
+
+  build-proto:
+    needs: [test]
+    name: Build Proto
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+    
+    - name: Install Protoc
+      uses: arduino/setup-protoc@v1
+      with:
+        version: '3.x'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Run proto
+      run: make proto
+      env:
+        GITHUB_TOKEN: ${{ secrets.GB_TOKEN_PRIVATE }}
+
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      continue-on-error: true
+      with:
+        commit_message: Update stub files
+        skip_dirty_check: true
+        skip_fetch: true
+        disable_globbing: true

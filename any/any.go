@@ -66,10 +66,10 @@ func GetMessageName(m []byte) (string, error) {
 	return e.GetInnerMessage().GetTypeUrl()[len(pkg):], nil
 }
 
-func getEnvelope(m []byte) (pb.Envelope, error) {
+func getEnvelope(m []byte) (*pb.Envelope, error) {
 	var receivingEnvelope pb.Envelope
 
 	err := proto.Unmarshal(m, &receivingEnvelope)
 
-	return receivingEnvelope, err
+	return &receivingEnvelope, err
 }
