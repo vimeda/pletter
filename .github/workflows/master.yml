@@ -1,0 +1,32 @@
+name: Master
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Setup go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17.x
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Test
+        run: make test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GB_TOKEN_PRIVATE }}
